@@ -1,0 +1,2300 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Extracting and analyzing data form idescat.com &#8212; Extracting and analyzing data from web-pages with Web-Services and Web-Scraping</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Ws2';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Extracting and analyzing data form Eurostat" href="Ws1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Extracting and analyzing data from web-pages with Web-Services and Web-Scraping - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Extracting and analyzing data from web-pages with Web-Services and Web-Scraping - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Extracting and analyzing data from web-pages with Web-Services and Web-Scraping
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ws1.html"><strong>Extracting and analyzing data form <code class="docutils literal notranslate"><span class="pre">Eurostat</span></code></strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Extracting and analyzing data form <code class="docutils literal notranslate"><span class="pre">idescat.com</span></code></strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FabioScielzoOrtiz/Web_Services" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FabioScielzoOrtiz/Web_Services/issues/new?title=Issue%20on%20page%20%2FWs2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Ws2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Extracting and analyzing data form idescat.com</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements"><strong>Requirements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maria-s-analysis-in-catalonia"><strong>Maria’s analysis in Catalonia</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-and-processing-the-data"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-results"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maria-s-analysis-in-catalonia-by-city-comarca"><strong>Maria’s analysis in Catalonia by city (comarca)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gender-info-for-the-childs-born-in-catalonia-in-the-last-nine-years-2014-2022"><strong>Gender info for the childs born in Catalonia in the last nine years (2014-2022)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maria-s-analysis-in-catalonia-by-province"><strong>Maria’s analysis in Catalonia by province</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maria-s-analysis-in-catalonia-by-area-region"><strong>Maria’s analysis in Catalonia by area (region)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="extracting-and-analyzing-data-form-idescat-com">
+<h1><strong>Extracting and analyzing data form <code class="docutils literal notranslate"><span class="pre">idescat.com</span></code></strong><a class="headerlink" href="#extracting-and-analyzing-data-form-idescat-com" title="Link to this heading">#</a></h1>
+<section id="requirements">
+<h2><strong>Requirements</strong><a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="maria-s-analysis-in-catalonia">
+<h2><strong>Maria’s analysis in Catalonia</strong><a class="headerlink" href="#maria-s-analysis-in-catalonia" title="Link to this heading">#</a></h2>
+<section id="extracting-and-processing-the-data">
+<h3><strong>Extracting and processing the data</strong><a class="headerlink" href="#extracting-and-processing-the-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2018&#39;</span><span class="p">,</span> <span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;2022&#39;</span><span class="p">]</span>
+<span class="n">Maria_abs_freq</span><span class="p">,</span> <span class="n">Maria_total_position</span><span class="p">,</span> <span class="n">Maria_girls_position</span><span class="p">,</span> <span class="n">Maria_total_percent</span><span class="p">,</span> <span class="n">Maria_girls_percent</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span> <span class="p">:</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://api.idescat.cat/onomastica/v1/nadons/dades.json?id=40683&amp;t=</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">&amp;lang=es&#39;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">data_json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> 
+
+    <span class="n">Maria_abs_freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;v&#39;</span><span class="p">])</span> <span class="c1"># abs freq name Maria over the names of childs born in Catalonia in {year}</span>
+    <span class="n">Maria_total_position</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">])</span> <span class="c1"># rank of name Maria over the names of childs born in Catalonia in {year}</span>
+    <span class="n">Maria_girls_position</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">][</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span> <span class="c1"># rank of name Maria over the names of girls born in Catalonia in {year}</span>
+    <span class="n">Maria_total_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;w&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">])</span> <span class="c1"># % of childs born in Catalonia in {year} whose name is Maria</span>
+    <span class="n">Maria_girls_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;w&#39;</span><span class="p">][</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span>  <span class="c1"># % of girls born in Catalonia in {year} whose name is Maria</span>
+
+<span class="n">Maria_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;years&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">years</span>
+<span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_abs_freq</span>
+<span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_total_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_total_position</span>
+<span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_girls_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_girls_position</span>
+<span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_total_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_total_percent</span>
+<span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_girls_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_girls_percent</span>
+
+<span class="n">Maria_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Maria_dict</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="n">Maria_df</span><span class="o">.</span><span class="n">columns</span> <span class="p">:</span>
+    <span class="k">if</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_total_position&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_girls_position&#39;</span><span class="p">]</span> <span class="p">:</span>
+        <span class="n">Maria_df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Maria_total_percent&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_girls_percent&#39;</span><span class="p">]</span> <span class="p">:</span>
+        <span class="n">Maria_df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data-frame with the data</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maria</span><span class="se">\&#39;</span><span class="s1">s analysis in Catalonia</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Maria_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maria&#39;s analysis in Catalonia
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>466</td>
+      <td>8</td>
+      <td>4</td>
+      <td>7.38</td>
+      <td>15.15</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>387</td>
+      <td>13</td>
+      <td>6</td>
+      <td>6.36</td>
+      <td>13.00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>318</td>
+      <td>20</td>
+      <td>10</td>
+      <td>5.49</td>
+      <td>11.23</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>327</td>
+      <td>19</td>
+      <td>8</td>
+      <td>5.67</td>
+      <td>11.65</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>267</td>
+      <td>28</td>
+      <td>13</td>
+      <td>4.74</td>
+      <td>9.83</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="plotting-the-results">
+<h3><strong>Plotting the results</strong><a class="headerlink" href="#plotting-the-results" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Maria_df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;years&#39;</span><span class="p">]</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Absolute Frequencies Maria in Catalonia&quot;</span><span class="p">,</span> <span class="s2">&quot;Ranking: Maria total position in Catalonia&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Ranking: Maria girls position in Catalonia&quot;</span><span class="p">,</span> <span class="s2">&quot;Maria total </span><span class="si">% i</span><span class="s2">n Catalonia&quot;</span><span class="p">,</span> <span class="s2">&quot;Maria girls </span><span class="si">% i</span><span class="s2">n Catalonia&quot;</span><span class="p">]</span>
+
+<span class="c1"># Define the number of rows and columns for the matrix plot</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># You can adjust the number of columns as needed</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_cols</span><span class="p">))</span>
+
+<span class="c1"># Create a subplot with the specified number of rows and columns</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Flatten the axes array to make it easier to iterate</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;tab10&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">))</span>
+
+<span class="c1"># Loop through each &#39;geo&#39; and create a subplot in the matrix</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">col_name</span><span class="p">),</span> <span class="n">color</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">),</span> <span class="n">colors</span><span class="p">,</span> <span class="n">titles</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Get the current axis</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;years&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col_name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Maria_df</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">xticks_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Maria_df</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xticks_index</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remove any unused subplots in case the number of &#39;geo&#39; values is less than num_rows * num_cols</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">),</span> <span class="n">num_rows</span> <span class="o">*</span> <span class="n">num_cols</span><span class="p">):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Maria</span><span class="se">\&#39;</span><span class="s1">s born in Catalonia - Statistical information</span><span class="se">\n</span><span class="s1"> Last five years (2018-2022)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> <span class="c1"># Establishing a general tittle for the plot.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span> <span class="c1"># Adjust vertical (hspace) and horizontal (wspace) spacing</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Marias_Catalonia&#39;</span> <span class="o">+</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">550</span><span class="p">)</span>
+<span class="c1"># plt.tight_layout()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/eb29e9f6b6b6f5e9721a368e548e15cea1cdcd95ce34cafe630e00504d592d89.png" src="_images/eb29e9f6b6b6f5e9721a368e548e15cea1cdcd95ce34cafe630e00504d592d89.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="maria-s-analysis-in-catalonia-by-city-comarca">
+<h2><strong>Maria’s analysis in Catalonia by city (comarca)</strong><a class="headerlink" href="#maria-s-analysis-in-catalonia-by-city-comarca" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3><strong>Extracting and processing the data</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maria</span><span class="se">\&#39;</span><span class="s1">s analysis in Catalonia by city (comarca)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2018&#39;</span><span class="p">,</span> <span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;2022&#39;</span><span class="p">]</span>
+<span class="n">Maria_df_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">com_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">42</span><span class="p">):</span> <span class="c1"># 42 = len(data_json[&#39;onomastica_nadons&#39;][&#39;ff&#39;][&#39;f&#39;]) - 1</span>
+
+    <span class="n">Maria_abs_freq</span><span class="p">,</span> <span class="n">Maria_total_position</span><span class="p">,</span> <span class="n">Maria_girls_position</span><span class="p">,</span> <span class="n">Maria_total_percent</span><span class="p">,</span> <span class="n">Maria_girls_percent</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span> <span class="p">:</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://api.idescat.cat/onomastica/v1/nadons/dades.json?id=40683&amp;class=com&amp;t=</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">&amp;lang=es&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">data_json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> 
+
+        <span class="n">Maria_abs_freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">com_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;v&#39;</span><span class="p">])</span> <span class="c1"># abs freq name Maria over the names of childs born in comarca {com_id} in {year}</span>
+        <span class="n">Maria_total_position</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">com_id</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">])</span> <span class="c1"># rank of name Maria over the names of childs born in comarca {com_id} in {year}</span>
+        <span class="n">Maria_girls_position</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">com_id</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">][</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span> <span class="c1"># rank of name Maria over the names of girls born in comarca {com_id} in {year}</span>
+        <span class="n">Maria_total_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">com_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;w&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">])</span> <span class="c1"># % of childs born in comarca {com_id} in {year} whose name is Maria</span>
+        <span class="n">Maria_girls_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">com_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;w&#39;</span><span class="p">][</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span>  <span class="c1"># % of girls born in comarca {com_id} in {year} whose name is Maria</span>
+
+    <span class="n">Maria_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;years&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">years</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_abs_freq</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_total_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_total_position</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_girls_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_girls_position</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_total_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_total_percent</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_girls_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_girls_percent</span>  
+    <span class="n">com</span> <span class="o">=</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">com_id</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">][</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+    <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">com</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Maria_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maria&#39;s analysis in Catalonia by city (comarca)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###  Catalonia city (comarca) with more Maria\&#39;s born by year</span>
+
+<span class="n">Maria_abs_freq_year</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;2018&#39;</span><span class="p">,</span> <span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;2022&#39;</span><span class="p">]</span>  <span class="p">:</span>
+
+    <span class="n">Maria_abs_freq_city</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">com</span> <span class="ow">in</span> <span class="n">Maria_df_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">:</span>
+
+        <span class="n">value</span> <span class="o">=</span>  <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">com</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">com</span><span class="p">][</span><span class="s1">&#39;years&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">year</span><span class="p">,</span> <span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span> <span class="p">:</span> <span class="c1"># To avoid the cities with missing value.</span>
+        
+            <span class="n">Maria_abs_freq_city</span><span class="p">[</span><span class="n">com</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="n">Maria_abs_freq_year</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_abs_freq_city</span>
+
+
+<span class="n">Maria_abs_freq_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">Maria_abs_freq_index</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">city_max_Maria</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">years</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;2018&#39;</span><span class="p">,</span> <span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;2022&#39;</span><span class="p">]</span> 
+
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span> <span class="p">:</span>
+
+    <span class="n">Maria_abs_freq_values</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Maria_abs_freq_year</span><span class="p">[</span><span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">Maria_abs_freq_index</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Maria_abs_freq_year</span><span class="p">[</span><span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+    <span class="n">city_max_Maria</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_abs_freq_index</span><span class="p">[</span><span class="n">year</span><span class="p">][</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Maria_abs_freq_values</span><span class="p">[</span><span class="n">year</span><span class="p">])]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Catalonia city (comarca) with more Maria</span><span class="se">\&#39;</span><span class="s1">s born in </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1"> --&gt;&#39;</span><span class="p">,</span> <span class="n">city_max_Maria</span><span class="p">[</span><span class="n">year</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catalonia city (comarca) with more Maria&#39;s born in 2018 --&gt; Barcelonès
+Catalonia city (comarca) with more Maria&#39;s born in 2019 --&gt; Barcelonès
+Catalonia city (comarca) with more Maria&#39;s born in 2020 --&gt; Barcelonès
+Catalonia city (comarca) with more Maria&#39;s born in 2021 --&gt; Barcelonès
+Catalonia city (comarca) with more Maria&#39;s born in 2022 --&gt; Barcelonès
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3><strong>Plotting the results</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the number of rows and columns for the matrix plot</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># You can adjust the number of columns as needed</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_cols</span><span class="p">))</span>
+
+<span class="c1"># Create a subplot with the specified number of rows and columns</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+
+<span class="c1"># Flatten the axes array to make it easier to iterate</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;tab10&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">))</span>
+
+<span class="c1"># Loop through each &#39;geo&#39; and create a subplot in the matrix</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)),</span> <span class="n">colors</span><span class="p">,</span> <span class="n">years</span><span class="p">)</span> <span class="p">:</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Get the current axis</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Maria_abs_freq_values</span><span class="p">[</span><span class="n">year</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">Maria_abs_freq_index</span><span class="p">[</span><span class="n">year</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Cities&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remove any unused subplots in case the number of &#39;geo&#39; values is less than num_rows * num_cols</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">),</span> <span class="n">num_rows</span> <span class="o">*</span> <span class="n">num_cols</span><span class="p">):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Absolute Frequencies Maria by Catalonia cities (comarcas)</span><span class="se">\n</span><span class="s1"> Last five years (2018-2022)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> <span class="c1"># Establishing a general tittle for the plot.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span> <span class="c1"># Adjust vertical (hspace) and horizontal (wspace) spacing</span>
+<span class="c1"># fig.savefig(&#39;Marias_Areas_Catalonia&#39; + &#39;.jpg&#39;, format=&#39;jpg&#39;, dpi=550)</span>
+<span class="c1"># plt.tight_layout()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b9f3dc59349abd1f5ccd6ce483db9c9876bc87a8666d068b0497f62a286e8ff3.png" src="_images/b9f3dc59349abd1f5ccd6ce483db9c9876bc87a8666d068b0497f62a286e8ff3.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="gender-info-for-the-childs-born-in-catalonia-in-the-last-nine-years-2014-2022">
+<h2><strong>Gender info for the childs born in Catalonia in the last nine years (2014-2022)</strong><a class="headerlink" href="#gender-info-for-the-childs-born-in-catalonia-in-the-last-nine-years-2014-2022" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3><strong>Extracting and processing the data</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">try_float</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>   
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.idescat.cat/indicadors/?id=aec&amp;n=15237&amp;fil=43&amp;lang=en&#39;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
+
+<span class="n">columns</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s2">&quot;cap&quot;</span><span class="p">)</span> 
+<span class="n">columns_html</span> <span class="o">=</span> <span class="n">columns</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;thead th&quot;</span><span class="p">)</span>
+<span class="n">columns_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">columns_html</span><span class="p">))</span> <span class="p">:</span>
+    <span class="n">columns_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;thead th&quot;</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">columns_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">columns_list</span>
+<span class="n">tr_list</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">)</span>
+<span class="n">useful_info_index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,(</span><span class="nb">len</span><span class="p">(</span><span class="n">tr_list</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">useful_info_index</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">text_data</span> <span class="o">=</span> <span class="n">tr_list</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">row_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">row_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row_data</span><span class="p">]</span>
+    <span class="n">row_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">try_float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row_data</span><span class="p">]</span>
+    <span class="n">row_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row_data</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">rows</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">row_data</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns_list</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Boys_prop&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Boys&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Girls_prop&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Girls&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data-frame with the data</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Gender info for the childs born in Catalonia in the last nine years (2014-2022)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gender info for the childs born in Catalonia in the last nine years (2014-2022)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Boys</th>
+      <th>Girls</th>
+      <th>Total</th>
+      <th>Boys_prop</th>
+      <th>Girls_prop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022</td>
+      <td>29.187</td>
+      <td>27.195</td>
+      <td>56.382</td>
+      <td>0.518</td>
+      <td>0.482</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021</td>
+      <td>29.604</td>
+      <td>28.030</td>
+      <td>57.634</td>
+      <td>0.514</td>
+      <td>0.486</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>29.832</td>
+      <td>28.632</td>
+      <td>58.464</td>
+      <td>0.510</td>
+      <td>0.490</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019</td>
+      <td>31.453</td>
+      <td>30.095</td>
+      <td>61.548</td>
+      <td>0.511</td>
+      <td>0.489</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>32.623</td>
+      <td>30.943</td>
+      <td>63.566</td>
+      <td>0.513</td>
+      <td>0.487</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2017</td>
+      <td>34.462</td>
+      <td>32.341</td>
+      <td>66.803</td>
+      <td>0.516</td>
+      <td>0.484</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2016</td>
+      <td>35.435</td>
+      <td>33.539</td>
+      <td>68.974</td>
+      <td>0.514</td>
+      <td>0.486</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2015</td>
+      <td>36.406</td>
+      <td>34.044</td>
+      <td>70.450</td>
+      <td>0.517</td>
+      <td>0.483</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id4">
+<h3><strong>Plotting the results</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Boys_prop&#39;</span><span class="p">,</span> <span class="s1">&#39;Girls_prop&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Define the number of rows and columns for the matrix plot</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># You can adjust the number of columns as needed</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_cols</span><span class="p">))</span>
+
+<span class="c1"># Create a subplot with the specified number of rows and columns</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Flatten the axes array to make it easier to iterate</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;tab10&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">))</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Girls&#39;</span><span class="p">,</span> <span class="s1">&#39;Boys&#39;</span><span class="p">]</span>
+
+<span class="c1"># Loop through each &#39;geo&#39; and create a subplot in the matrix</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">)),</span> <span class="n">colors</span><span class="p">,</span> <span class="n">selected_columns</span><span class="p">,</span> <span class="n">titles</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Get the current axis</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col_name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">xticks_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xticks_index</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">])</span>
+
+<span class="c1"># Remove any unused subplots in case the number of &#39;geo&#39; values is less than num_rows * num_cols</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">),</span> <span class="n">num_rows</span> <span class="o">*</span> <span class="n">num_cols</span><span class="p">):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Relative frequencies of the gender of childs born in Catalonia</span><span class="se">\n</span><span class="s1"> Last nine years (2014-2022)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> <span class="c1"># Establishing a general tittle for the plot.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># Adjust vertical (hspace) and horizontal (wspace) spacing</span>
+<span class="c1"># fig.savefig(&#39;Gender_born_Catalonia&#39; + &#39;.jpg&#39;, format=&#39;jpg&#39;, dpi=550)</span>
+<span class="c1"># plt.tight_layout()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b01f0738ebb5113ceb608e2468e8d1db733778e4d8bf845f77182809e8e79dd0.png" src="_images/b01f0738ebb5113ceb608e2468e8d1db733778e4d8bf845f77182809e8e79dd0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="maria-s-analysis-in-catalonia-by-province">
+<h2><strong>Maria’s analysis in Catalonia by province</strong><a class="headerlink" href="#maria-s-analysis-in-catalonia-by-province" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h3><strong>Extracting and processing the data</strong><a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2018&#39;</span><span class="p">,</span> <span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;2022&#39;</span><span class="p">]</span>
+<span class="n">Maria_df_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">prov_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span> <span class="c1"># 4 = len(data_json[&#39;onomastica_nadons&#39;][&#39;ff&#39;][&#39;f&#39;]) - 1</span>
+
+    <span class="n">Maria_abs_freq</span><span class="p">,</span> <span class="n">Maria_total_position</span><span class="p">,</span> <span class="n">Maria_girls_position</span><span class="p">,</span> <span class="n">Maria_total_percent</span><span class="p">,</span> <span class="n">Maria_girls_percent</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span> <span class="p">:</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://api.idescat.cat/onomastica/v1/nadons/dades.json?id=40683&amp;class=prov&amp;t=</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">&amp;lang=es&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">data_json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> 
+
+        <span class="n">Maria_abs_freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">prov_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;v&#39;</span><span class="p">])</span> <span class="c1"># abs freq name Maria over the names of childs born in province {prov_id} in {year}</span>
+        <span class="n">Maria_total_position</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">prov_id</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">])</span> <span class="c1"># rank of name Maria over the names of childs born in province {prov_id} in {year}</span>
+        <span class="n">Maria_girls_position</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">prov_id</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">][</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span> <span class="c1"># rank of name Maria over the names of girls born in province {prov_id} in {year}</span>
+        <span class="n">Maria_total_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">prov_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;w&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">])</span> <span class="c1"># % of childs born in province {prov_id} in {year} whose name is Maria</span>
+        <span class="n">Maria_girls_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">prov_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;w&#39;</span><span class="p">][</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span>  <span class="c1"># % of girls born in province {prov_id} in {year} whose name is Maria</span>
+
+    <span class="n">Maria_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;years&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">years</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_abs_freq</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_total_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_total_position</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_girls_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_girls_position</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_total_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_total_percent</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_girls_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_girls_percent</span>  
+    <span class="n">prov</span> <span class="o">=</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">prov_id</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">][</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+    <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Maria_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maria</span><span class="se">\&#39;</span><span class="s1">s analysis in Catalonia by province&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">prov</span> <span class="ow">in</span> <span class="n">Maria_df_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------------------------------------------------------------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prov</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maria&#39;s analysis in Catalonia by province
+-----------------------------------------------------------------------------------------------
+Barcelona
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>344</td>
+      <td>11</td>
+      <td>5</td>
+      <td>7.41</td>
+      <td>15.19</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>288</td>
+      <td>14</td>
+      <td>7</td>
+      <td>6.46</td>
+      <td>13.17</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>245</td>
+      <td>19</td>
+      <td>9</td>
+      <td>5.81</td>
+      <td>11.89</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>189</td>
+      <td>33</td>
+      <td>14</td>
+      <td>4.59</td>
+      <td>9.56</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Girona
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>47</td>
+      <td>6</td>
+      <td>2</td>
+      <td>7.00</td>
+      <td>14.43</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>27</td>
+      <td>31</td>
+      <td>16</td>
+      <td>4.21</td>
+      <td>8.62</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>33</td>
+      <td>21</td>
+      <td>11</td>
+      <td>5.24</td>
+      <td>10.79</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>37</td>
+      <td>12</td>
+      <td>5</td>
+      <td>6.10</td>
+      <td>12.45</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>19</td>
+      <td>47</td>
+      <td>22</td>
+      <td>3.21</td>
+      <td>6.52</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Lleida
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>17</td>
+      <td>28</td>
+      <td>13</td>
+      <td>4.89</td>
+      <td>10.15</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>23</td>
+      <td>8</td>
+      <td>3</td>
+      <td>6.69</td>
+      <td>13.71</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>8</td>
+      <td>69</td>
+      <td>38</td>
+      <td>2.44</td>
+      <td>4.84</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>17</td>
+      <td>19</td>
+      <td>7</td>
+      <td>5.30</td>
+      <td>11.06</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>19</td>
+      <td>15</td>
+      <td>7</td>
+      <td>5.89</td>
+      <td>12.22</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Tarragona
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>58</td>
+      <td>4</td>
+      <td>2</td>
+      <td>8.81</td>
+      <td>18.22</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>49</td>
+      <td>6</td>
+      <td>4</td>
+      <td>7.60</td>
+      <td>15.85</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>32</td>
+      <td>19</td>
+      <td>8</td>
+      <td>5.23</td>
+      <td>10.62</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>30</td>
+      <td>26</td>
+      <td>12</td>
+      <td>5.00</td>
+      <td>10.33</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>40</td>
+      <td>10</td>
+      <td>5</td>
+      <td>6.66</td>
+      <td>13.70</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Catalonia province with more Maria&#39;s born in 2022</span>
+
+<span class="n">Maria_abs_freq_2022</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">prov</span> <span class="ow">in</span> <span class="n">Maria_df_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">Maria_abs_freq_2022</span><span class="p">[</span><span class="n">prov</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">][</span><span class="s1">&#39;years&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2022&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">Maria_abs_freq_2022_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Maria_abs_freq_2022</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">Maria_abs_freq_2022_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Maria_abs_freq_2022</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+<span class="n">prov_max_Maria_2022</span> <span class="o">=</span> <span class="n">Maria_abs_freq_2022_index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Maria_abs_freq_2022_values</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Catalonia province with more Maria</span><span class="se">\&#39;</span><span class="s1">s born in 2022 --&gt;&#39;</span><span class="p">,</span> <span class="n">prov_max_Maria_2022</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catalonia province with more Maria&#39;s born in 2022 --&gt; Barcelona
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3><strong>Plotting the results</strong><a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="s1">&#39;Barcelona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="s1">&#39;Barcelona&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="mi">3</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">prov</span> <span class="ow">in</span> <span class="n">Maria_df_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">:</span>
+    <span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_total_position&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_girls_position&#39;</span><span class="p">]</span> <span class="p">:</span>
+            <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">][</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">][</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Maria_total_percent&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_girls_percent&#39;</span><span class="p">]</span> <span class="p">:</span>
+            <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">][</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">][</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+
+<span class="n">provinces</span> <span class="o">=</span> <span class="n">Maria_df_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the number of rows and columns for the matrix plot</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># You can adjust the number of columns as needed</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">provinces</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_cols</span><span class="p">))</span>
+
+<span class="c1"># Create a subplot with the specified number of rows and columns</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Flatten the axes array to make it easier to iterate</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;tab10&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">provinces</span><span class="p">))</span>
+
+<span class="c1"># Loop through each &#39;geo&#39; and create a subplot in the matrix</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">prov</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">provinces</span><span class="p">)),</span> <span class="n">colors</span><span class="p">,</span> <span class="n">provinces</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Get the current axis</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;years&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prov</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">xticks_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">prov</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xticks_index</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remove any unused subplots in case the number of &#39;geo&#39; values is less than num_rows * num_cols</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">provinces</span><span class="p">),</span> <span class="n">num_rows</span> <span class="o">*</span> <span class="n">num_cols</span><span class="p">):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Absolute Frequencies Maria by Catalonia provinces</span><span class="se">\n</span><span class="s1"> Last five years (2018-2022)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> <span class="c1"># Establishing a general tittle for the plot.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># Adjust vertical (hspace) and horizontal (wspace) spacing</span>
+<span class="c1"># fig.savefig(&#39;Marias_Provinces_Catalonia&#39; + &#39;.jpg&#39;, format=&#39;jpg&#39;, dpi=550)</span>
+<span class="c1"># plt.tight_layout()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dd0445958d90daa6be4dd2790acd2bc4a513b220cb1074d82f65c0f24767815b.png" src="_images/dd0445958d90daa6be4dd2790acd2bc4a513b220cb1074d82f65c0f24767815b.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="maria-s-analysis-in-catalonia-by-area-region">
+<h2><strong>Maria’s analysis in Catalonia by area (region)</strong><a class="headerlink" href="#maria-s-analysis-in-catalonia-by-area-region" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h3><strong>Extracting and processing the data</strong><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2018&#39;</span><span class="p">,</span> <span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;2022&#39;</span><span class="p">]</span>
+<span class="n">Maria_df_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">at_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span> <span class="c1"># 8 = len(data_json[&#39;onomastica_nadons&#39;][&#39;ff&#39;][&#39;f&#39;]) - 1</span>
+
+    <span class="n">Maria_abs_freq</span><span class="p">,</span> <span class="n">Maria_total_position</span><span class="p">,</span> <span class="n">Maria_girls_position</span><span class="p">,</span> <span class="n">Maria_total_percent</span><span class="p">,</span> <span class="n">Maria_girls_percent</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span> <span class="p">:</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://api.idescat.cat/onomastica/v1/nadons/dades.json?id=40683&amp;class=at&amp;t=</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">&amp;lang=es&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">data_json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> 
+
+        <span class="n">Maria_abs_freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">at_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;v&#39;</span><span class="p">])</span> <span class="c1"># abs freq name Maria over the names of childs born in comarca {com_id} in {year}</span>
+        <span class="n">Maria_total_position</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">at_id</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">])</span> <span class="c1"># rank of name Maria over the names of childs born in comarca {com_id} in {year}</span>
+        <span class="n">Maria_girls_position</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">at_id</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">][</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span> <span class="c1"># rank of name Maria over the names of girls born in comarca {com_id} in {year}</span>
+        <span class="n">Maria_total_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">at_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;w&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">])</span> <span class="c1"># % of childs born in comarca {com_id} in {year} whose name is Maria</span>
+        <span class="n">Maria_girls_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">at_id</span><span class="p">][</span><span class="s1">&#39;pos1&#39;</span><span class="p">][</span><span class="s1">&#39;w&#39;</span><span class="p">][</span><span class="s1">&#39;sex&#39;</span><span class="p">])</span>  <span class="c1"># % of girls born in comarca {com_id} in {year} whose name is Maria</span>
+
+    <span class="n">Maria_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;years&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">years</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_abs_freq</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_total_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_total_position</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_girls_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_girls_position</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_total_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_total_percent</span>
+    <span class="n">Maria_dict</span><span class="p">[</span><span class="s1">&#39;Maria_girls_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_girls_percent</span>  
+    <span class="n">at</span> <span class="o">=</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;onomastica_nadons&#39;</span><span class="p">][</span><span class="s1">&#39;ff&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">][</span><span class="n">at_id</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">][</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+    <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Maria_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maria</span><span class="se">\&#39;</span><span class="s1">s analysis in Catalonia by area (region)&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">Maria_df_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------------------------------------------------------------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">at</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maria&#39;s analysis in Catalonia by area (region)
+-----------------------------------------------------------------------------------------------
+Metropolità
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>308</td>
+      <td>10</td>
+      <td>5</td>
+      <td>7.67</td>
+      <td>15.66</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>246</td>
+      <td>15</td>
+      <td>7</td>
+      <td>6.38</td>
+      <td>13.01</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>210</td>
+      <td>22</td>
+      <td>10</td>
+      <td>5.77</td>
+      <td>11.80</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>211</td>
+      <td>20</td>
+      <td>8</td>
+      <td>5.77</td>
+      <td>11.86</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>164</td>
+      <td>30</td>
+      <td>13</td>
+      <td>4.63</td>
+      <td>9.63</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Comarques Gironines
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>47</td>
+      <td>6</td>
+      <td>2</td>
+      <td>7.11</td>
+      <td>14.67</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>27</td>
+      <td>31</td>
+      <td>16</td>
+      <td>4.29</td>
+      <td>8.77</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>33</td>
+      <td>21</td>
+      <td>11</td>
+      <td>5.30</td>
+      <td>10.90</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>37</td>
+      <td>12</td>
+      <td>5</td>
+      <td>6.21</td>
+      <td>12.69</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>19</td>
+      <td>44</td>
+      <td>20</td>
+      <td>3.27</td>
+      <td>6.65</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Camp de Tarragona
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>39</td>
+      <td>5</td>
+      <td>3</td>
+      <td>8.72</td>
+      <td>18.03</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>35</td>
+      <td>3</td>
+      <td>2</td>
+      <td>8.26</td>
+      <td>17.34</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>18</td>
+      <td>28</td>
+      <td>13</td>
+      <td>4.42</td>
+      <td>8.89</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>17</td>
+      <td>37</td>
+      <td>18</td>
+      <td>4.27</td>
+      <td>8.89</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>30</td>
+      <td>5</td>
+      <td>3</td>
+      <td>7.60</td>
+      <td>15.50</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Terres de l&#39;Ebre
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>14</td>
+      <td>7</td>
+      <td>4</td>
+      <td>10.52</td>
+      <td>21.41</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>11</td>
+      <td>9</td>
+      <td>6</td>
+      <td>8.12</td>
+      <td>16.69</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>5</td>
+      <td>30</td>
+      <td>16</td>
+      <td>4.13</td>
+      <td>8.17</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>10</td>
+      <td>12</td>
+      <td>6</td>
+      <td>8.26</td>
+      <td>16.34</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>5</td>
+      <td>37</td>
+      <td>15</td>
+      <td>4.00</td>
+      <td>8.35</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Ponent
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>14</td>
+      <td>31</td>
+      <td>13</td>
+      <td>4.65</td>
+      <td>9.60</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>20</td>
+      <td>7</td>
+      <td>4</td>
+      <td>6.78</td>
+      <td>13.93</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>7</td>
+      <td>68</td>
+      <td>34</td>
+      <td>2.46</td>
+      <td>4.87</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>16</td>
+      <td>15</td>
+      <td>5</td>
+      <td>5.76</td>
+      <td>11.98</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>16</td>
+      <td>15</td>
+      <td>8</td>
+      <td>5.71</td>
+      <td>11.85</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Comarques Centrals
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>22</td>
+      <td>18</td>
+      <td>8</td>
+      <td>6.46</td>
+      <td>13.56</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>29</td>
+      <td>7</td>
+      <td>2</td>
+      <td>8.73</td>
+      <td>17.91</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>17</td>
+      <td>19</td>
+      <td>7</td>
+      <td>5.40</td>
+      <td>11.14</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>17</td>
+      <td>23</td>
+      <td>11</td>
+      <td>5.52</td>
+      <td>11.09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>17</td>
+      <td>22</td>
+      <td>9</td>
+      <td>5.46</td>
+      <td>11.36</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Alt Pirineu i Aran
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>0</td>
+      <td>_</td>
+      <td>_</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+      <td>_</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------------------------------
+Penedès
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>years</th>
+      <th>Maria_abs_freq</th>
+      <th>Maria_total_position</th>
+      <th>Maria_girls_position</th>
+      <th>Maria_total_percent</th>
+      <th>Maria_girls_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>20</td>
+      <td>23</td>
+      <td>12</td>
+      <td>5.38</td>
+      <td>11.22</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>18</td>
+      <td>24</td>
+      <td>12</td>
+      <td>4.85</td>
+      <td>9.91</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>27</td>
+      <td>4</td>
+      <td>3</td>
+      <td>7.59</td>
+      <td>15.86</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>16</td>
+      <td>38</td>
+      <td>16</td>
+      <td>4.32</td>
+      <td>9.09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>15</td>
+      <td>38</td>
+      <td>18</td>
+      <td>4.26</td>
+      <td>8.87</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Catalonia region with more Maria\&#39;s born in 2022</span>
+
+<span class="n">selected_at</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Maria_df_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;Alt Pirineu i Aran&#39;</span><span class="p">]</span>
+<span class="n">Maria_abs_freq_2022</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">selected_at</span> <span class="p">:</span>
+    <span class="n">Maria_abs_freq_2022</span><span class="p">[</span><span class="n">at</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">][</span><span class="s1">&#39;years&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2022&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">Maria_abs_freq_2022_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Maria_abs_freq_2022</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">Maria_abs_freq_2022_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Maria_abs_freq_2022</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+<span class="n">prov_max_Maria_2022</span> <span class="o">=</span> <span class="n">Maria_abs_freq_2022_index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Maria_abs_freq_2022_values</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Catalonia area with more Maria</span><span class="se">\&#39;</span><span class="s1">s born in 2022 --&gt;&#39;</span><span class="p">,</span> <span class="n">prov_max_Maria_2022</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catalonia area with more Maria&#39;s born in 2022 --&gt; Metropolità
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3><strong>Plotting the results</strong><a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">selected_at</span> <span class="p">:</span>
+    <span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_total_position&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_girls_position&#39;</span><span class="p">]</span> <span class="p">:</span>
+            <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">][</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">][</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Maria_total_percent&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria_girls_percent&#39;</span><span class="p">]</span> <span class="p">:</span>
+            <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">][</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">][</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+
+<span class="c1"># Define the number of rows and columns for the matrix plot</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># You can adjust the number of columns as needed</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_at</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_cols</span><span class="p">))</span>
+
+<span class="c1"># Create a subplot with the specified number of rows and columns</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Flatten the axes array to make it easier to iterate</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;tab10&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_at</span><span class="p">))</span>
+
+<span class="c1"># Loop through each &#39;geo&#39; and create a subplot in the matrix</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">at</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_at</span><span class="p">)),</span> <span class="n">colors</span><span class="p">,</span> <span class="n">selected_at</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Get the current axis</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;years&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Maria_abs_freq&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">at</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">xticks_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Maria_df_dict</span><span class="p">[</span><span class="n">at</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xticks_index</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remove any unused subplots in case the number of &#39;geo&#39; values is less than num_rows * num_cols</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_at</span><span class="p">),</span> <span class="n">num_rows</span> <span class="o">*</span> <span class="n">num_cols</span><span class="p">):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Absolute Frequencies Maria by Catalonia areas - Last five years (2018-2022)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> <span class="c1"># Establishing a general tittle for the plot.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># Adjust vertical (hspace) and horizontal (wspace) spacing</span>
+<span class="c1"># fig.savefig(&#39;Marias_Areas_Catalonia&#39; + &#39;.jpg&#39;, format=&#39;jpg&#39;, dpi=550)</span>
+<span class="c1"># plt.tight_layout()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f256a7f7cbfde95d0e32ffb0dd77bba63c5e72af31a53f6fa5739090e1647e36.png" src="_images/f256a7f7cbfde95d0e32ffb0dd77bba63c5e72af31a53f6fa5739090e1647e36.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Ws1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Extracting and analyzing data form <code class="docutils literal notranslate"><span class="pre">Eurostat</span></code></strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements"><strong>Requirements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maria-s-analysis-in-catalonia"><strong>Maria’s analysis in Catalonia</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-and-processing-the-data"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-results"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maria-s-analysis-in-catalonia-by-city-comarca"><strong>Maria’s analysis in Catalonia by city (comarca)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gender-info-for-the-childs-born-in-catalonia-in-the-last-nine-years-2014-2022"><strong>Gender info for the childs born in Catalonia in the last nine years (2014-2022)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maria-s-analysis-in-catalonia-by-province"><strong>Maria’s analysis in Catalonia by province</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maria-s-analysis-in-catalonia-by-area-region"><strong>Maria’s analysis in Catalonia by area (region)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Extracting and processing the data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><strong>Plotting the results</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fabio Scielzo Ortiz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
